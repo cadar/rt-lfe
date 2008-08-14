@@ -24,5 +24,4 @@ false
 [[success,4],[fail,0]]
 bash-3.2$ exit
 
-
-
+("false" is printed when the false case is tested.)
