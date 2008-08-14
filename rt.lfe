@@ -1,22 +1,10 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;;  rt.lfe - Regression Testing LFE
+;;  rt.lfe - Regression Testing for LFE
 ;;
 ;;  2008-08-14 - Mats Westin - Created
 ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;;   Compile with:
-;;     erl -noshell -pa $WORK_PATH -pa $LFE_PATH \
-;;         -eval 'code:load_file(lfe_test).' \
-;;         -eval 'io:format("~n~p~n",[lfe_test:start()]).' -s erlang halt
-;;   Run test with: 
-;;     erl -noshell -pa $WORK_PATH -pa $LFE_PATH \
-;;         -eval 'code:load_file(lfe_test).' \
-;;         -eval 'io:format("~n~p~n",[lfe_test:start()]).' -s erlang halt
-;;
-;;   Change lfe_test to the name of your module. /Mats
-;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-syntax try-catch
   (macro 
@@ -38,11 +26,11 @@
 (define (fail? x tests)
   (if (== x 'false) 
     (begin 
-      (: io format '"~p~n" tests) 
+      (: io format '"~p~n" (list x))
       1) 
     0))
 
-(define (count-success-old tests) 
+(define (count-success tests) 
   `((success ,(: lists sum 
 		(: lists map 
 		  (lambda (x) (success? x)) 
@@ -51,9 +39,6 @@
 	     (: lists map 
 	       (lambda (x) (fail? x tests))
 	       tests)))))
-
-(define (count-success tests) 
-  (pln tests))
 
 (define (test-test)
   (test 'testing-tests 
