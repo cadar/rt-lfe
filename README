@@ -1,16 +1,28 @@
 Description: A simple regression testing framework for LFE.
 
-
-Compile with:
+Compile
+-------
      erl -noshell -pa $WORK_PATH -pa $LFE_PATH \
          -eval 'code:load_file(demo).' \
          -eval 'io:format("~n~p~n",[demo:start()]).' -s erlang halt
 
-Run test with: 
+Run tests
+---------
      erl -noshell -pa $WORK_PATH -pa $LFE_PATH \
          -eval 'code:load_file(demo).' \
          -eval 'io:format("~n~p~n",[demo:start()]).' -s erlang halt
 
+Output
+------
+Current test report:
+bash-3.2$ c
+
+{ok,demo,[]}
+bash-3.2$ r
+false
+
+[[success,4],[fail,0]]
+bash-3.2$ exit
 
 
 
