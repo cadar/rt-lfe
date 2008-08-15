@@ -6,4 +6,3 @@
 (define (start)
   (count-success
    (test-test)))
-
