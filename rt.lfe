@@ -2,7 +2,7 @@
 ;;
 ;;  rt.lfe - Regression Testing for LFE
 ;;
-;;  2008-08-14 - Mats Westin - Created
+;;  2008-08-14 - cadar@github - Created
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
