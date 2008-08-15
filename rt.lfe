@@ -43,7 +43,6 @@
 
 (define (test-test)
   (test 'testing-tests 
-	'2 
 	(== (success? 'true) 1)
 	(== (success? 'false) 0)
 	(== (fail? 'false '(true false)) 1)
