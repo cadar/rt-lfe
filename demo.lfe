@@ -4,5 +4,4 @@
 (include-file "rt.lfe")
 
 (define (start)
-  (count-success
-   (test-test)))
+   (test-test))

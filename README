@@ -1,27 +1,15 @@
 Description: A simple regression testing framework for LFE.
 
-Compile
--------
-     erl -noshell -pa $LFE_PATH \
-         -eval 'code:load_file(demo).' \
-         -eval 'io:format("~n~p~n",[demo:start()]).' -s erlang halt
+Quick start
+-----------
+sudo apt-get install inotify-tools
+git clone git://github.com/cadar/rt-lfe.git
+cd rt-lfe
+make
+make test
 
-Run tests
----------
-     erl -noshell -pa $LFE_PATH \
-         -eval 'code:load_file(demo).' \
-         -eval 'io:format("~n~p~n",[demo:start()]).' -s erlang halt
 
-Output
-------
-Current test report:
-bash-3.2$ c
+auto_compile.sh will recompile and run start when a *.lfe file is saved.
+auto_compile.sh depends on inotify-tools: sudo apt-get install inotify-tools
 
-{ok,demo,[]}
-bash-3.2$ r
-false
 
-[[success,4],[fail,0]]
-bash-3.2$ exit
-
-("false" is printed when the false case is tested.)

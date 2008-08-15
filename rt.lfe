@@ -31,17 +31,19 @@
     0))
 
 (define (count-success tests) 
-  `((success ,(: lists sum 
+  (let ((o 1))
+  `#(#(success ,(: lists sum 
 		(: lists map 
 		  (lambda (x) (success? x)) 
 		  tests)))
-    (fail ,(: lists sum 
+    #(fail ,(: lists sum 
 	     (: lists map 
 	       (lambda (x) (fail? x tests))
-	       tests)))))
+	       tests))))))
 
 (define (test-test)
   (test 'testing-tests 
+	'2 
 	(== (success? 'true) 1)
 	(== (success? 'false) 0)
 	(== (fail? 'false '(true false)) 1)
