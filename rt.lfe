@@ -16,34 +16,35 @@
 
 (define-syntax test
   (macro
-    ((e)      `(cons (try-catch ,e) '()))
-    ((e . es) `(cons (try-catch ,e) (test . ,es)))))
+    ('() '())
+    ((e)      `(cons ,e '()))
+    ((e . es) `(cons ,e (test . ,es)))))
 
-;; Sounds important ;)
-(define (success? x)
-  (if (== x 'true) 1 0))
+(define-syntax is
+  (macro
+    ((e) (hd e))
+    ((e . es) `(if (== ,e (is ,es)) 'true
+		   (begin 
+		     (: io format '"Test ~p failed. ~p =/= ~p~n" (list ',e ,e (is ,es)))
+		     'false)))))
 
-(define (fail? x tests)
-  (if (== x 'false) 
-    (begin 
-      (: io format '"~p~n" (list x))
-      1) 
-    0))
+(define (inc-true x li)
+  (+ x (if (== (hd li) 'true) 1 0)))
+(define (inc-false x li)
+  (+ x (if (== (hd li) 'false) 
+	 (begin
+	   1)
+	 0)))
 
-(define (count-success tests) 
-  (let ((o 1))
-  `#(#(success ,(: lists sum 
-		(: lists map 
-		  (lambda (x) (success? x)) 
-		  tests)))
-    #(fail ,(: lists sum 
-	     (: lists map 
-	       (lambda (x) (fail? x tests))
-	       tests))))))
+(define (cs x) (cs-new x 0 0 x ))
+(define (cs-new li success fail testname)
+  (if (is_atom li)
+    li
+    (if (== li '())    
+      (list (hd testname) success fail)
+      (if (is_list (hd li))
+	(cons (cs (hd li))
+	      (cs-new (tl li) (inc-true success li) (inc-false fail li) testname))
+	(begin (cs (hd li)) 
+	       (cs-new (tl li) (inc-true success li) (inc-false fail li) testname))))))
 
-(define (test-test)
-  (test 'testing-tests 
-	(== (success? 'true) 1)
-	(== (success? 'false) 0)
-	(== (fail? 'false '(true false)) 1)
-	(== (fail? 'true '(true false)) 0)))
