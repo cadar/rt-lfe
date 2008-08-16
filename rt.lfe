@@ -16,7 +16,7 @@
 
 (define-syntax test
   (macro
-    ('() '())
+    ('()      '())
     ((e)      `(cons ,e '()))
     ((e . es) `(cons ,e (test . ,es)))))
 
@@ -25,18 +25,17 @@
     ((e) (hd e))
     ((e . es) `(if (== ,e (is ,es)) 'true
 		   (begin 
-		     (: io format '"Test ~p failed. ~p =/= ~p~n" (list ',e ,e (is ,es)))
+		     (: io format '"Test ~p failed. ~p =/= ~p~n" 
+			(list ',e ,e (is ,es)))
 		     'false)))))
 
 (define (inc-true x li)
   (+ x (if (== (hd li) 'true) 1 0)))
 (define (inc-false x li)
-  (+ x (if (== (hd li) 'false) 
-	 (begin
-	   1)
-	 0)))
+  (+ x (if (== (hd li) 'false) 1 0)))
 
 (define (cs x) (cs-new x 0 0 x ))
+
 (define (cs-new li success fail testname)
   (if (is_atom li)
     li
@@ -44,7 +43,13 @@
       (list (hd testname) success fail)
       (if (is_list (hd li))
 	(cons (cs (hd li))
-	      (cs-new (tl li) (inc-true success li) (inc-false fail li) testname))
-	(begin (cs (hd li)) 
-	       (cs-new (tl li) (inc-true success li) (inc-false fail li) testname))))))
+	      (cs-new (tl li) 
+		      (inc-true success li) 
+		      (inc-false fail li) 
+		      testname))
+	(begin 
+	  (cs (hd li)) 
+	  (cs-new (tl li) 
+		  (inc-true success li) 
+		  (inc-false fail li) testname))))))
 
