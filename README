@@ -2,7 +2,7 @@ Description: A simple regression testing framework for LFE.
 
 Quick start 
 -----------
-sudo apt-get install build-essential inotify-tools libncurses5-dev
+sudo apt-get install build-essential inotify-tools libncurses5-dev git-core
 wget http://www.erlang.org/download/otp_src_R12B-3.tar.gz
 tar xvf otp_src_R12B-3.tar.gz 
 cd otp_src_R12B-3
