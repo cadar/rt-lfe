@@ -9,6 +9,12 @@ cd otp_src_R12B-3
 ./configure
 make
 sudo make install
+wget --output-document=LFE0.2.zip http://forum.trapexit.org/download.php?id=140
+wget --output-document=LFE0.2.1.zip http://forum.trapexit.org/download.php?id=151
+unzip -d lfe0.2 -o LFE0.2.zip
+unzip -d lfe0.2 -o LFE0.2.1.zip
+cd lfe0.2  
+erl -make
 cd 
 git clone git://github.com/cadar/rt-lfe.git
 cd rt-lfe
