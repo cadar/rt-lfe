@@ -1,8 +1,15 @@
 Description: A simple regression testing framework for LFE.
 
-Quick start
+Quick start 
 -----------
-sudo apt-get install inotify-tools
+sudo apt-get install build-essential inotify-tools libncurses5-dev
+wget http://www.erlang.org/download/otp_src_R12B-3.tar.gz
+tar xvf otp_src_R12B-3.tar.gz 
+cd otp_src_R12B-3
+./configure
+make
+sudo make install
+cd 
 git clone git://github.com/cadar/rt-lfe.git
 cd rt-lfe
 make
