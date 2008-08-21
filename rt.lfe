@@ -23,33 +23,41 @@
 (define-syntax is
   (macro
     ((e) (hd e))
-    ((e . es) `(if (== ,e (is ,es)) 'true
-		   (begin 
-		     (: io format '"Test ~p failed. ~p =/= ~p~n" 
-			(list ',e ,e (is ,es)))
-		     'false)))))
+    ((e . es) `(if (== ,e (is ,es)) 
+		 (begin
+		   (: io format '".")
+		   'true)
+		 (begin 
+		   (: io format '"~p ==> ~p =/= ~p~n"  (list ',e ,e (is ,es)))
+		   'false)))))
 
 (define (inc-true x li)
   (+ x (if (== (hd li) 'true) 1 0)))
+
 (define (inc-false x li)
   (+ x (if (== (hd li) 'false) 1 0)))
 
-(define (cs x) (cs-new x 0 0 x ))
+(define (count-success x) (count-success-new x 0 0 x ))
 
-(define (cs-new li success fail testname)
-  (if (is_atom li)
+(define (count-success-new li success fail testname)
+  (if (or (is_atom li) 
+	  (is_number li))
     li
     (if (== li '())    
       (list (hd testname) success fail)
       (if (is_list (hd li))
-	(cons (cs (hd li))
-	      (cs-new (tl li) 
-		      (inc-true success li) 
-		      (inc-false fail li) 
-		      testname))
+	(cons (count-success (hd li))
+	      (count-success-new (tl li) 
+				 (inc-true success li) 
+				 (inc-false fail li) 
+				 testname))
 	(begin 
-	  (cs (hd li)) 
-	  (cs-new (tl li) 
-		  (inc-true success li) 
-		  (inc-false fail li) testname))))))
+	  (count-success (hd li))
+	  (count-success-new (tl li) 
+			     (inc-true success li) 
+			     (inc-false fail li) testname))))))
 
+(define (show-result x)
+  (: io format '"~n~p~n" (list
+			  (count-success x))))
+			  
