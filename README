@@ -1,7 +1,8 @@
 Description: A simple regression testing framework for LFE.
 
-Quick start 
------------
+
+Quick install Erlang
+--------------------
 sudo apt-get install build-essential inotify-tools libncurses5-dev git-core
 wget http://www.erlang.org/download/otp_src_R12B-3.tar.gz
 tar xvf otp_src_R12B-3.tar.gz 
@@ -9,6 +10,10 @@ cd otp_src_R12B-3
 ./configure
 make
 sudo make install
+
+
+Quick install LFE
+--------------------
 wget --output-document=LFE0.2.zip http://forum.trapexit.org/download.php?id=140
 wget --output-document=LFE0.2.1.zip http://forum.trapexit.org/download.php?id=151
 unzip -d lfe0.2 -o LFE0.2.zip
@@ -20,6 +25,15 @@ git clone git://github.com/cadar/rt-lfe.git
 cd rt-lfe
 make
 make test
+
+
+Manual
+------
+test - Is used to declare a new test. The first parameter should be a quoted atom that describes the test. If the test returns true. It will be a successful test. 
+
+is - Takes to parameters. First expression with the test. Second parameter the expected computed value. The macro prints failing tests to stdout.
+
+show-result - Prints the result.
 
 
 auto_compile.sh will recompile and run start when a *.lfe file is saved.
