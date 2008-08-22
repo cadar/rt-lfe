@@ -6,6 +6,6 @@
 (define (start)
   (count-success 
    (test 'setup
-	 (== 1 1))))
+	 (is 1 1))))
    
   
