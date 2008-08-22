@@ -23,13 +23,14 @@
 (define-syntax is
   (macro
     ((e) (hd e))
-    ((e . es) `(if (== ,e (is ,es)) 
+    ((e . es) `(let ((result ,e))
+		 (if (== result (is ,es)) 
 		 (begin
 		   (: io format '".")
 		   'true)
 		 (begin 
-		   (: io format '"~p ==> ~p =/= ~p~n"  (list ',e ,e (is ,es)))
-		   'false)))))
+		   (: io format '" ~p => ~p =/= ~p  Failing!~n"  (list ',e result (is ,es)))
+		   'false))))))
 
 (define (inc-true x li)
   (+ x (if (== (hd li) 'true) 1 0)))
@@ -58,6 +59,6 @@
 			     (inc-false fail li) testname))))))
 
 (define (show-result x)
-  (: io format '"~n~p~n" (list
-			  (count-success x))))
+  (: io format '"~n~p~n" 
+     (list (count-success x))))
 			  
