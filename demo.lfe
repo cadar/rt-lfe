@@ -1,11 +1,9 @@
 (define-module demo
-  (export (start 0)))
+  (export (tsuite 0)))
 
 (include-file "rt.lfe")
 
-(define (start)
-  (count-success 
-   (test 'setup
-	 (is 1 1))))
-   
-  
+(define (tsuite)
+  (test 'test-add
+	(is (+ 1 1) 3)))
+
