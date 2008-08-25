@@ -13,13 +13,17 @@ sudo make install
 
 
 Quick install LFE
---------------------
+-----------------
 wget --output-document=LFE0.2.zip http://forum.trapexit.org/download.php?id=140
 wget --output-document=LFE0.2.1.zip http://forum.trapexit.org/download.php?id=151
 unzip -d lfe0.2 -o LFE0.2.zip
 unzip -d lfe0.2 -o LFE0.2.1.zip
 cd lfe0.2  
 erl -make
+
+
+Quick install rt-lfe
+--------------------
 cd 
 git clone git://github.com/cadar/rt-lfe.git
 cd rt-lfe
@@ -29,11 +33,12 @@ make test
 
 Manual
 ------
-test - Is used to declare a new test. The first parameter should be a quoted atom that describes the test. If the test returns true. It will be a successful test. 
-
 is - Takes to parameters. First expression with the test. Second parameter the expected computed value. The macro prints failing tests to stdout.
 
+test - Is used to declare a new test. The first parameter should be a quoted atom that describes the test. If the test returns true. It will be a successful test. 
+
 show-result - Prints the result.
+
 
 
 auto_compile.sh will recompile and run start when a *.lfe file is saved.
