@@ -40,7 +40,6 @@ test - Is used to declare a new test. The first parameter should be a quoted ato
 show-result - Prints the result.
 
 
-
 auto_compile.sh will recompile and run start when a *.lfe file is saved.
 auto_compile.sh depends on inotify-tools: sudo apt-get install inotify-tools
 
