@@ -16,7 +16,6 @@
 
 (define-syntax test
   (macro
-    ('()      '())
     ((e)      `(cons ,e '()))
     ((e . es) `(cons ,e (test . ,es)))))
 
@@ -58,7 +57,8 @@
 			     (inc-true success li) 
 			     (inc-false fail li) testname))))))
 
-(define (show-result x)
-  (: io format '"~n~p~n" 
-     (list (count-success x))))
+(define-syntax off (macro (e ''nop)))
+(define-syntax on  (macro ((e) e)))
+
+
 			  
