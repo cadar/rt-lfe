@@ -73,7 +73,7 @@
   (if (< (length li) 4)
     (pr-line li level)
     (let* (((tuple rest last) (: lists split (- (length li) 3) li)))
-      (pr-line last level)
+ (pr-line last level)
       (print-foreach rest (+ level 2)))))
 
 (define (sum-test li f)
