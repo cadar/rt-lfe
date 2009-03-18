@@ -21,15 +21,18 @@
 
 (define-syntax is
   (macro
-    ((e) (hd e))
-    ((e . es) `(let ((result ,e))
-		 (if (== result (is ,es)) 
+    ((e1 . (e2 . ())) `(let ((result1 ,e1)
+                             (result2 ,e2))
+		 (if (== (== result1 result2) 'true) 
 		 (begin
 		   (: io format '".")
 		   'true)
 		 (begin 
-		   (: io format '" ~p => ~p =/= ~p  Failing!~n"  (list ',e result (is ,es)))
-		   'false))))))
+		   (: io format '" ~p => ~p =/= ~p  Failing!~n"  (list ',e1 result1 result2))
+		   'false))))
+    ((e1 . (e2 . ee)) (begin (: io format '"two arguments only.~n" )  3))
+    (e (begin (: io format '"two arguments only.~n" )  4))))
+
 
 (define (inc-true x li)
   (+ x (if (== (hd li) 'true) 1 0)))
